@@ -1,0 +1,6 @@
+[
+    {
+        "new": "Server: %hostname%",
+        "rooted": "Gained Root on %hostname"
+    }
+]
