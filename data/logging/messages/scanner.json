@@ -1,6 +1,7 @@
 [
     {
         "new": "Server: %hostname%",
-        "rooted": "Gained Root on %hostname"
+        "rooted": "Gained Root on %hostname%",
+        "already-rooted": "server %hostname% already rooted"
     }
 ]
