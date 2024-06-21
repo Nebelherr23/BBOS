@@ -24,9 +24,6 @@ export class Logger {
         for (const item of Object.keys(msg)) {
             this.messages.set(item, msg[item]);
         }
-        for (let [key, msg] of this.messages.entries()) {
-            ns.print(`${key} -> ${msg}`);
-        }
         this.ns = ns;
     }
 
@@ -45,8 +42,7 @@ export class Logger {
         let msg = this.processMessage(event, extra);
         let out = new LogRecord(this.prefix, level, event, msg);
         this.ns.print(`Port Write -> ${out.toJson()}`);
-        let success = this.port.tryWrite(out);
-        if (!success) { this.log(level,event,extra); }
+        this.port.tryWrite(out);
     }
     info(event: string, extra: Map<string, string>) { this.log('INFO', event, extra); }
     debug(event: string, extra: Map<string, string>) { this.log('DEBUG', event, extra); }
@@ -79,8 +75,8 @@ export class LogRecord {
                 this.level = `${Fonts.PURPLE}CRT${Fonts.RESET}`;
                 break;
         }
-        this.module = module;
-        this.event = event;
+        this.module = module.toLowerCase();
+        this.event = event.toLowerCase();
     }
 
     toJson(): string {
